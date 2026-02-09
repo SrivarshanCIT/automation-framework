@@ -19,23 +19,20 @@ public class DriverManager {
     }
 
     public static void setDriver(String browser) {
-        WebDriver webDriver = null;
+        WebDriver webDriver;
 
         switch (browser.toLowerCase()) {
+
             case "chrome":
-                WebDriverManager.chromedriver().setup();
                 ChromeOptions chromeOptions = new ChromeOptions();
                 if (ConfigReader.isHeadless()) {
-                    chromeOptions.addArguments("--headless");
+                    chromeOptions.addArguments("--headless=new");
                 }
-                chromeOptions.addArguments("--disable-notifications");
-                chromeOptions.addArguments("--start-maximized");
-                chromeOptions.addArguments("--disable-popup-blocking");
+                chromeOptions.addArguments("--window-size=1920,1080");
                 webDriver = new ChromeDriver(chromeOptions);
                 break;
 
             case "firefox":
-                WebDriverManager.firefoxdriver().setup();
                 FirefoxOptions firefoxOptions = new FirefoxOptions();
                 if (ConfigReader.isHeadless()) {
                     firefoxOptions.addArguments("--headless");
@@ -44,19 +41,18 @@ public class DriverManager {
                 break;
 
             case "edge":
-                WebDriverManager.edgedriver().setup();
                 EdgeOptions edgeOptions = new EdgeOptions();
                 if (ConfigReader.isHeadless()) {
-                    edgeOptions.addArguments("--headless");
+                    edgeOptions.addArguments("--headless=new");
                 }
+                edgeOptions.addArguments("--window-size=1920,1080");
                 webDriver = new EdgeDriver(edgeOptions);
                 break;
 
             default:
-                throw new IllegalArgumentException("Browser type not supported: " + browser);
+                throw new IllegalArgumentException("Browser not supported: " + browser);
         }
 
-        webDriver.manage().window().maximize();
         webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(ConfigReader.getImplicitWait()));
         webDriver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(ConfigReader.getPageLoadTimeout()));
         driver.set(webDriver);
@@ -68,4 +64,5 @@ public class DriverManager {
             driver.remove();
         }
     }
+
 }
