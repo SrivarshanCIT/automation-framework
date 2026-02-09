@@ -16,7 +16,7 @@
         <java.version>11</java.version>
         <selenium.version>4.40.0</selenium.version>
         <cucumber.version>7.14.0</cucumber.version>
-        <allure.version>2.25.0</allure.version>
+        <allure.version>2.24.0</allure.version>
         <webdrivermanager.version>6.3.3</webdrivermanager.version>
         <log4j.version>2.25.3</log4j.version>
     </properties>
@@ -56,6 +56,12 @@
             <groupId>io.qameta.allure</groupId>
             <artifactId>allure-cucumber7-jvm</artifactId>
             <version>${allure.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-junit5</artifactId>
+            <version>${allure.version}</version>
+            <scope>test</scope>
         </dependency>
 
         <!-- Logging (clean stack) -->
