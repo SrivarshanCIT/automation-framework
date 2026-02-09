@@ -27,6 +27,10 @@ public class DriverManager {
                 ChromeOptions chromeOptions = new ChromeOptions();
                 if (ConfigReader.isHeadless()) {
                     chromeOptions.addArguments("--headless=new");
+                    chromeOptions.addArguments("--disable-gpu");
+                    chromeOptions.addArguments("--no-sandbox");
+                    chromeOptions.addArguments("--disable-dev-shm-usage");
+                    chromeOptions.addArguments("--window-size=1920,1080");
                 }
                 chromeOptions.addArguments("--window-size=1920,1080");
                 webDriver = new ChromeDriver(chromeOptions);
@@ -43,8 +47,11 @@ public class DriverManager {
             case "edge":
                 EdgeOptions edgeOptions = new EdgeOptions();
                 if (ConfigReader.isHeadless()) {
-                    edgeOptions.addArguments("--headless=new");
                 }
+                edgeOptions.addArguments("--headless=new");
+                edgeOptions.addArguments("--disable-gpu");
+                edgeOptions.addArguments("--no-sandbox");
+                edgeOptions.addArguments("--disable-dev-shm-usage");
                 edgeOptions.addArguments("--window-size=1920,1080");
                 webDriver = new EdgeDriver(edgeOptions);
                 break;
